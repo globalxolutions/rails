@@ -50,9 +50,9 @@ module ActionView
 
     initializer "action_view.finalize_compiled_template_methods" do |app|
       ActiveSupport.on_load(:action_view) do
-        option = app.config.action_view.delete(:finalize_compiled_template_methods)
-
-        if option != NULL_OPTION
+        option = app.config.action_view.extract!(:finalize_compiled_template_methods)
+        
+        if !option.empty?
           ActiveSupport::Deprecation.warn "action_view.finalize_compiled_template_methods is deprecated and has no effect"
         end
       end
